@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-chunk-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "List with time chunk for react.",
   "main": "dist/index.js",
   "scripts": {

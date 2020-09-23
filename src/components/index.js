@@ -70,9 +70,8 @@ export default class ReactChunkList extends Component {
   chunkRender(inItems) {
     if (!inItems.length) return;
     const { chunk, interval } = this.props;
-
-    clearInterval(this.timer);
     const chunks = nxChunk(inItems, chunk);
+    this.reset();
     this.timer = setInterval(() => {
       const { runtime } = this.state;
       const _runtime = [].concat(runtime, chunks.shift());
@@ -81,6 +80,11 @@ export default class ReactChunkList extends Component {
         clearInterval(this.timer);
       }
     }, interval);
+  }
+
+  reset() {
+    this.state.runtime = [];
+    clearInterval(this.timer);
   }
 
   render() {
