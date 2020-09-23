@@ -17,11 +17,15 @@ npm update @feizheng/react-chunk-list
 ```
 
 ## properties
-| Name      | Type   | Required | Default | Description                           |
-| --------- | ------ | -------- | ------- | ------------------------------------- |
-| className | string | false    | -       | The extended className for component. |
-| value     | object | false    | null    | The changed value.                    |
-| onChange  | func   | false    | noop    | The change handler.                   |
+| Name      | Type   | Required | Default | Description                                       |
+| --------- | ------ | -------- | ------- | ------------------------------------------------- |
+| className | string | false    | -       | The extended className for component.             |
+| virtual   | bool   | false    | -       | If node name is React.Framgment.                  |
+| nodeName  | any    | false    | 'div'   | Use customize node name(tagName or ReactElement). |
+| items     | array  | false    | []      | List data source.                                 |
+| template  | func   | false    | noop    | List item template.                               |
+| interval  | number | false    | 100     | The timer duration.                               |
+| chunk     | number | false    | 5       | The chunk size.                                   |
 
 
 ## usage
@@ -43,7 +47,7 @@ npm update @feizheng/react-chunk-list
   import './assets/style.scss';
 
   class App extends React.Component {
-    state = { hasUpdate: false };
+    state = { hasUpdate: false, items: [] };
 
     componentDidMount() {
       NxOfflineSw.install({
@@ -51,13 +55,40 @@ npm update @feizheng/react-chunk-list
           this.setState({ hasUpdate: true });
         }
       });
+      this.genList();
+    }
+
+    genList() {
+      const items = [];
+      for (let index = 0; index < 4000; index++) {
+        items.push({
+          id: index,
+          value: `value - ${index}`
+        });
+      }
+      console.time('render');
+      this.setState({ items });
+    }
+
+    componentDidUpdate() {
+      console.timeEnd('render');
     }
 
     render() {
       return (
         <div className="p-3 app-container">
-          <ReactChunkList className="bg-gray-800 mb-5 text-white" />
+          {/* Core components usage start */}
+          <ReactChunkList
+            items={this.state.items}
+            interval={10}
+            chunk={1000}
+            template={({ item }) => {
+              return <div key={item.id}>{item.value}</div>;
+            }}
+            className="bg-gray-800 mb-5 p-4 text-white"
+          />
           <button className="button">I am a button</button>
+          {/* Core components usage end */}
           <ReactSwUpdateTips value={this.state.hasUpdate} />
           <ReactGithubCorner value="https://github.com/afeiship/react-chunk-list" />
         </div>
