@@ -12,11 +12,15 @@ npm install -S @jswork/react-chunk-list
 ```
 
 ## properties
-| Name      | Type   | Required | Default | Description                           |
-| --------- | ------ | -------- | ------- | ------------------------------------- |
-| className | string | false    | -       | The extended className for component. |
-| value     | object | false    | null    | The changed value.                    |
-| onChange  | func   | false    | noop    | The change handler.                   |
+| Name      | Type   | Required | Default | Description                                       |
+| --------- | ------ | -------- | ------- | ------------------------------------------------- |
+| className | string | false    | -       | The extended className for component.             |
+| virtual   | bool   | false    | -       | If node name is React.Framgment.                  |
+| nodeName  | any    | false    | 'div'   | Use customize node name(tagName or ReactElement). |
+| items     | array  | false    | []      | List data source.                                 |
+| template  | func   | false    | noop    | List item template.                               |
+| interval  | number | false    | 100     | The timer duration.                               |
+| chunk     | number | false    | 5       | The chunk size.                                   |
 
 
 ## usage
@@ -39,13 +43,41 @@ npm install -S @jswork/react-chunk-list
   import './assets/style.scss';
 
   class App extends React.Component {
+    state = { hasUpdate: false, items: [] };
+    componentDidMount() {
+      this.genList();
+    }
+
+    genList() {
+      const items = [];
+      for (let index = 0; index < 4000; index++) {
+        items.push({
+          id: index,
+          value: `value - ${index}`
+        });
+      }
+      console.time('render');
+      this.setState({ items });
+    }
+
+    componentDidUpdate() {
+      console.timeEnd('render');
+    }
+
     render() {
       return (
         <ReactDemokit
           className="p-3 app-container"
           url="https://github.com/afeiship/react-chunk-list">
-          <ReactChunkList className="mb-5 has-text-white" />
-          <button className="button is-primary is-fullwidth">Start~</button>
+          <ReactChunkList
+            items={this.state.items}
+            interval={10}
+            chunk={1000}
+            template={({ item }) => {
+              return <div key={item.id}>{item.value}</div>;
+            }}
+            className="bg-gray-800 mb-5 p-4 text-white"
+          />
         </ReactDemokit>
       );
     }
