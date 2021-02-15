@@ -1,6 +1,6 @@
-import nxChunk from '@feizheng/next-chunk';
-import noop from '@feizheng/noop';
-import ReactList from '@feizheng/react-list';
+import nxChunk from '@jswork/next-chunk';
+import noop from '@jswork/noop';
+import ReactList from '@jswork/react-list';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
