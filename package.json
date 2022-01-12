@@ -1,6 +1,6 @@
 {
   "name": "@jswork/react-chunk-list",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "List with time chunk for react.",
   "main": "dist/index.js",
   "scripts": {
@@ -83,7 +83,7 @@
   "dependencies": {
     "@jswork/next-chunk": "^1.0.0",
     "@jswork/noop": "^1.0.0",
-    "@jswork/react-list": "^1.0.0",
+    "@jswork/react-list": "^1.1.4",
     "classnames": "^2.2.6"
   },
   "publishConfig": {

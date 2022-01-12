@@ -4,6 +4,7 @@ import ReactList from '@jswork/react-list';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 const CLASS_NAME = 'react-chunk-list';
 
 export default class ReactChunkList extends Component {
@@ -14,14 +15,6 @@ export default class ReactChunkList extends Component {
      * The extended className for component.
      */
     className: PropTypes.string,
-    /**
-     * If node name is React.Framgment.
-     */
-    virtual: PropTypes.bool,
-    /**
-     * Use customize node name(tagName or ReactElement).
-     */
-    nodeName: PropTypes.any,
     /**
      * List data source.
      */
@@ -42,7 +35,6 @@ export default class ReactChunkList extends Component {
 
   static defaultProps = {
     items: [],
-    nodeName: 'div',
     template: noop,
     interval: 100,
     chunk: 5

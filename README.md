@@ -12,15 +12,13 @@ npm install -S @jswork/react-chunk-list
 ```
 
 ## properties
-| Name      | Type   | Required | Default | Description                                       |
-| --------- | ------ | -------- | ------- | ------------------------------------------------- |
-| className | string | false    | -       | The extended className for component.             |
-| virtual   | bool   | false    | -       | If node name is React.Framgment.                  |
-| nodeName  | any    | false    | 'div'   | Use customize node name(tagName or ReactElement). |
-| items     | array  | false    | []      | List data source.                                 |
-| template  | func   | false    | noop    | List item template.                               |
-| interval  | number | false    | 100     | The timer duration.                               |
-| chunk     | number | false    | 5       | The chunk size.                                   |
+| Name      | Type   | Required | Default | Description                           |
+| --------- | ------ | -------- | ------- | ------------------------------------- |
+| className | string | false    | -       | The extended className for component. |
+| items     | array  | false    | []      | List data source.                     |
+| template  | func   | false    | noop    | List item template.                   |
+| interval  | number | false    | 100     | The timer duration.                   |
+| chunk     | number | false    | 5       | The chunk size.                       |
 
 
 ## usage
